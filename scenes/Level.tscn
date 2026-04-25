@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dtilcbr8twr5b"]
+
+[ext_resource type="Script" uid="uid://bqlva7gimch6s" path="res://scripts/level.gd" id="1_level_script"]
+[ext_resource type="PackedScene" uid="uid://igfx08bm6m3p" path="res://scenes/Player.tscn" id="2_player_scene"]
+[ext_resource type="PackedScene" uid="uid://dfdtugwss1ii8" path="res://scenes/NPC.tscn" id="3_npc_scene"]
+[ext_resource type="Script" uid="uid://ne1ix0wie0vm" path="res://scripts/camera_follow.gd" id="4_camera_script"]
+
+[node name="Level" type="Node3D" unique_id=1777777754]
+script = ExtResource("1_level_script")
+npc_scene = ExtResource("3_npc_scene")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=929821632]
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=761876049]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.45
+shadow_enabled = true
+
+[node name="GeneratedWorld" type="Node3D" parent="." unique_id=1337436177]
+
+[node name="Player" parent="." unique_id=68612538 instance=ExtResource("2_player_scene")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1692133433]
+transform = Transform3D(1, 0, 0, 0, 0.86, 0.51, 0, -0.51, 0.86, 0, 3.9, 14.25)
+script = ExtResource("4_camera_script")
+target_path = NodePath("../Player")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1073850085]
+
+[node name="Panel" type="Panel" parent="UI" unique_id=2116287795]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 680.0
+offset_bottom = 132.0
+
+[node name="MessageLabel" type="Label" parent="UI/Panel" unique_id=1727956883]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 45.0
+text = "Avanza por el mapa  y evita los vehículos."
+autowrap_mode = 3
+
+[node name="ScoreLabel" type="Label" parent="UI/Panel" unique_id=1795373919]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 520.0
+offset_bottom = 78.0
+
+[node name="AttemptsLabel" type="Label" parent="UI/Panel" unique_id=215425903]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 300.0
+offset_bottom = 78.0
+text = "Intentos: 0"
+
+[node name="ControlsLabel" type="Label" parent="UI/Panel" unique_id=637089454]
+modulate = Color(0.86, 0.86, 0.86, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 82.0
+offset_right = 640.0
+offset_bottom = 110.0
+text = "W-adelante, S-atras,D-derecha,A-izquierda"
+
+[node name="MessageTimer" type="Timer" parent="." unique_id=226182814]
+wait_time = 2.8
+one_shot = true
